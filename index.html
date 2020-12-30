@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+      <title>Dashboard </title>
+      <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
+      <!-- BEGIN: Vendor CSS-->
+      <link rel="stylesheet" type="text/css" href="assets/css/vendors.min.css">
+      <!-- END: Vendor CSS-->
+      <!-- BEGIN: Theme CSS-->
+      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-extended.min.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/colors.min.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/components.min.css">
+      <!-- END: Theme CSS-->
+      <!-- BEGIN: Page CSS-->
+      <link rel="stylesheet" type="text/css" href="assets/css/vertical-menu-modern.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/palette-gradient.min.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/jquery-jvectormap-2.0.3.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/morris.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/palette-gradient.min.css">
+      <!-- END: Page CSS-->
+      <link rel="stylesheet" type="text/css" href="assets/css/line-awesome.css">
+      <!-- BEGIN: Custom CSS-->
+      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <!-- END: Custom CSS-->
+      <script>
+         window.onload = function () {
+         
+         var chart1 = new CanvasJS.Chart("chartContainer1", {
+         	theme: "light2", // "light1", "light2", "dark1", "dark2"
+         	animationEnabled: true,
+         	title: {
+         		text: ""
+         	},
+         	axisY: {
+         		title: "NPS by Product Category",
+         		prefix: ""
+         	},
+         	data: [{
+         		type: "rangeColumn",
+         		yValueFormatString: "$#,##0.00",
+         		xValueFormatString: "MMM YYYY",
+         		toolTipContent: "{x}<br>High: {y[0]}<br>Low: {y[1]}",
+         		dataPoints: [		
+         			{ x: new Date(2020, 0), y: [27.10, 38.99] },
+         			{ x: new Date(2020, 1), y: [29.92, 37.00] },
+         			{ x: new Date(2020, 2), y: [35.95, 42.54] },
+         			{ x: new Date(2020, 3), y: [37.27, 48.50] },
+         			{ x: new Date(2020, 4), y: [43.33, 50.51] },
+         			{ x: new Date(2020, 5), y: [46.69, 52.86] },
+         			{ x: new Date(2020, 6), y: [41.80, 50.75] },
+         			{ x: new Date(2020, 7), y: [41.51, 51.22] },
+         			{ x: new Date(2020, 8), y: [45.09, 50.14] },
+         			{ x: new Date(2020, 9), y: [47.98, 53.73] },
+         			{ x: new Date(2020, 10), y: [43.57, 50.49] },
+         			{ x: new Date(2020, 11), y: [51.51, 57.89] }
+         		]
+         	}]
+         });
+         chart1.render();
+         
+         
+         
+         var chart = new CanvasJS.Chart("chartContainer", {
+         	animationEnabled: true,
+         	theme: "light2",
+         	title:{
+         		text: ""
+         	},
+         	axisX:{
+         		valueFormatString: "DD MMM",
+         		crosshair: {
+         			enabled: true,
+         			snapToDataPoint: true
+         		}
+         	},
+         	axisY: {
+         		title: "Net Promoter Score",
+         		includeZero: true,
+         		crosshair: {
+         			enabled: true
+         		}
+         	},
+         	toolTip:{
+         		shared:true
+         	},  
+         	legend:{
+         		cursor:"pointer",
+         		verticalAlign: "bottom",
+         		horizontalAlign: "left",
+         		dockInsidePlotArea: true,
+         		itemclick: toogleDataSeries
+         	},
+         	data: [{
+         		type: "line",
+         		showInLegend: true,
+         		name: "Total Visit",
+         		markerType: "square",
+         		xValueFormatString: "DD MMM, YYYY",
+         		color: "#F08080",
+         		dataPoints: [
+         			{ x: new Date(2017, 0, 3), y: 650 },
+         			{ x: new Date(2017, 0, 4), y: 700 },
+         			{ x: new Date(2017, 0, 5), y: 710 },
+         			{ x: new Date(2017, 0, 6), y: 658 },
+         			{ x: new Date(2017, 0, 7), y: 734 },
+         			{ x: new Date(2017, 0, 8), y: 963 },
+         			{ x: new Date(2017, 0, 9), y: 847 },
+         			{ x: new Date(2017, 0, 10), y: 853 },
+         			{ x: new Date(2017, 0, 11), y: 869 },
+         			{ x: new Date(2017, 0, 12), y: 943 },
+         			{ x: new Date(2017, 0, 13), y: 970 },
+         			{ x: new Date(2017, 0, 14), y: 869 },
+         			{ x: new Date(2017, 0, 15), y: 890 },
+         			{ x: new Date(2017, 0, 16), y: 930 }
+         		]
+         	},
+         	{
+         		type: "line",
+         		showInLegend: true,
+         		name: "Unique Visit",
+         		lineDashType: "dash",
+         		dataPoints: [
+         			{ x: new Date(2017, 0, 3), y: 510 },
+         			{ x: new Date(2017, 0, 4), y: 560 },
+         			{ x: new Date(2017, 0, 5), y: 540 },
+         			{ x: new Date(2017, 0, 6), y: 558 },
+         			{ x: new Date(2017, 0, 7), y: 544 },
+         			{ x: new Date(2017, 0, 8), y: 693 },
+         			{ x: new Date(2017, 0, 9), y: 657 },
+         			{ x: new Date(2017, 0, 10), y: 663 },
+         			{ x: new Date(2017, 0, 11), y: 639 },
+         			{ x: new Date(2017, 0, 12), y: 673 },
+         			{ x: new Date(2017, 0, 13), y: 660 },
+         			{ x: new Date(2017, 0, 14), y: 562 },
+         			{ x: new Date(2017, 0, 15), y: 643 },
+         			{ x: new Date(2017, 0, 16), y: 570 }
+         		]
+         	}]
+         });
+         chart.render();
+         
+         function toogleDataSeries(e){
+         	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+         		e.dataSeries.visible = false;
+         	} else{
+         		e.dataSeries.visible = true;
+         	}
+         	chart.render();
+         }
+         
+         var chart = new CanvasJS.Chart("chartContainerResponse", {
+         	animationEnabled: true,
+         	zoomEnabled: true,
+         	title:{
+         		text: "" 
+         	},
+         	data: data  // random generator below
+         });
+         chart.render();
+         
+         }
+         
+         var limit = 100;
+         
+         var y = 0;
+         var data = [];
+         var dataSeries = { type: "line" };
+         var dataPoints = [];
+         for (var i = 0; i < limit; i += 1) {
+         	y += (Math.random() * 10 - 5);
+         	dataPoints.push({
+         		x: i - limit / 2,
+         		y: y                
+         	});
+         	<!-- alert(dataPoints); -->
+         	dataSeries.dataPoints = dataPoints;
+         data.push(dataSeries);
+         
+         }
+           
+      </script>
+	  
+	  
+   </head>
+   <!-- END: Head-->
+   <!-- BEGIN: Body-->
+   <body class="vertical-layout vertical-menu-modern vertical-collapsed-menu 2-columns  menu-collapsed fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+      <!-- BEGIN: Header-->
+      <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
+         <div class="navbar-wrapper">
+            <div class="navbar-header">
+               <ul class="nav navbar-nav flex-row">
+                  <li class="nav-item mobile-menu d-lg-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="las la-bars"></i></a></li>
+                  <li class="nav-item mr-auto">
+                     <a class="navbar-brand" href="#">
+                        <img class="brand-logo" alt="logo" src="assets/img/logo.png">
+                        <h3 class="brand-text">Logo</h3>
+                     </a>
+                  </li>
+
+               </ul>
+            </div>
+            <div class="navbar-container content">
+               <div class="collapse navbar-collapse" id="navbar-mobile">
+                  <ul class="nav navbar-nav mr-auto float-left">
+                     <li class="nav-item d-none d-lg-block nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="las la-bars ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i><i class="las la-bars"></i></a></li>
+                     <li class="nav-item d-lg-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="las la-bars"></i></a></li>
+                     <li class="headig-top">
+                        <h3>Net Promoter Score Dashboard</h3>
+                     </li>
+                  </ul>
+                  <ul class="nav navbar-nav float-right">
+                     <li class="nav-item d-none d-lg-block">
+                        <a class="nav-link nav-link-expand" href="#">
+                           <!--<i class="las la-expand"></i>--> <img src="assets/img/menu-sym-top1.png">
+                        </a>
+                     </li>
+                     <li class="nav-item d-none d-lg-block">
+                        <a class="nav-link nav-link-label" href="#">
+                           <!--<i class="las la-calendar"></i>--> <img src="assets/img/menu-sym-top2.png">
+                        </a>
+                     </li>
+                     <li class="dropdown dropdown-notification nav-item">
+                        <a class="nav-link nav-link-label" href="#" data-toggle="dropdown">
+                           <!--<i class="las la-project-diagram"></i>--> <img src="assets/img/menu-sym-top3.png"><span class="badge badge-pill badge-danger badge-up badge-glow">5</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                           <li class="dropdown-menu-header">
+                              <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6>
+                              <span class="notification-tag badge badge-danger float-right m-0">5 New</span>
+                           </li>
+                           <li class="scrollable-container media-list w-100">
+                              <a href="javascript:void(0)">
+                                 <div class="media">
+                                    <div class="media-left align-self-center"><i class="las la-plus-square icon-bg-circle bg-cyan mr-0"></i></div>
+                                    <div class="media-body">
+                                       <h6 class="media-heading">You have new order!</h6>
+                                       <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                       <small>
+                                       <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">30 minutes ago</time></small>
+                                    </div>
+                                 </div>
+                              </a>
+                              <a href="javascript:void(0)">
+                                 <div class="media">
+                                    <div class="media-left align-self-center"><i class="las la-cloud-download-alt icon-bg-circle bg-red bg-darken-1 mr-0"></i></div>
+                                    <div class="media-body">
+                                       <h6 class="media-heading red darken-1">99% Server load</h6>
+                                       <p class="notification-text font-small-3 text-muted">Aliquam tincidunt mauris eu risus.</p>
+                                       <small>
+                                       <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Five hour ago</time></small>
+                                    </div>
+                                 </div>
+                              </a>
+                              <a href="javascript:void(0)">
+                                 <div class="media">
+                                    <div class="media-left align-self-center"><i class="las la-exclamation-triangle icon-bg-circle bg-yellow bg-darken-3 mr-0"></i></div>
+                                    <div class="media-body">
+                                       <h6 class="media-heading yellow darken-3">Warning notifixation</h6>
+                                       <p class="notification-text font-small-3 text-muted">Vestibulum auctor dapibus neque.</p>
+                                       <small>
+                                       <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Today</time></small>
+                                    </div>
+                                 </div>
+                              </a>
+                              <a href="javascript:void(0)">
+                                 <div class="media">
+                                    <div class="media-left align-self-center"><i class="las la-check-circle icon-bg-circle bg-cyan mr-0"></i></div>
+                                    <div class="media-body">
+                                       <h6 class="media-heading">Complete the task</h6>
+                                       <small>
+                                       <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last week</time></small>
+                                    </div>
+                                 </div>
+                              </a>
+                              <a href="javascript:void(0)">
+                                 <div class="media">
+                                    <div class="media-left align-self-center"><i class="las la-file icon-bg-circle bg-teal mr-0"></i></div>
+                                    <div class="media-body">
+                                       <h6 class="media-heading">Generate monthly report</h6>
+                                       <small>
+                                       <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last month</time></small>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li>
+                        </ul>
+                     </li>
+                     <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                           <!--<i class="la la-ellipsis-h"></i>--> <img src="assets/img/menu-sym-top4.png">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                           <a class="dropdown-item" href="user-profile.html"><i class="las la-user"></i> Edit Profile</a><a class="dropdown-item" href="app-kanban.html"><i class="las la-clipboard"></i> Todo</a><a class="dropdown-item" href="user-cards.html"><i class="las la-check-square"></i> Task</a>
+                           <div class="dropdown-divider"></div>
+                           <a class="dropdown-item" href="login-with-bg-image.html"><i class="las la-power-off"></i> Logout</a>
+                        </div>
+                     </li>
+                     <li class="dropdown dropdown-user nav-item last-plus-box"><a class="dropdown-toggle nav-link dropdown-user-link user-link-plus-box" href="#"><i class="las la-plus"></i></a>            
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </nav>
+      <!-- END: Header-->
+      <!-- BEGIN: Main Menu-->
+      <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+         <div class="main-menu-content">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+               <li class="nav-item"><a href="#"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
+               </li>
+               <li class="nav-item">
+                  <a href="#">
+                     <!--<i class="la la-television"></i>--><img src="assets/img/menu-symb1.png"><span class="menu-title" data-i18n="Templates">Promoter Score</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a href="#" target="_blank">
+                     <!--<i class="la la-shopping-cart"></i>--><img src="assets/img/menu-symb2.png"><span class="menu-title" data-i18n="eCommerce">Promoter Message</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a href="#" target="_blank">
+                     <!--<i class="la la-plane"></i>--><img src="assets/img/menu-symb3.png"><span class="menu-title" data-i18n="Travel &amp; Booking">Promoter Graph</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a href="#" target="_blank">
+                     <!--<i class="la la-stethoscope"></i>--><img src="assets/img/menu-symb4.png"><span class="menu-title" data-i18n="Hospital">All Promoter</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a href="#" target="_blank">
+                     <!--<i class="la la-bitcoin"></i>--><img src="assets/img/menu-symb5.png"><span class="menu-title" data-i18n="Crypto">Net Promoter</span>
+                  </a>
+               </li>
+               <li class="nav-item top-left-menu-last"><a href="#" target="_blank"><i class="las la-bell"></i><span class="menu-title" data-i18n="Raise Support">Raise Support</span></a>
+               </li>
+               <li class=" nav-item"><a href="#" target="_blank"><i class="la la-text-height"></i><span class="menu-title" data-i18n="Documentation">Documentation</span></a>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <!-- END: Main Menu-->
+      <!-- BEGIN: Content-->
+      <div class="app-content content">
+         <div class="content-overlay"></div>
+         <div class="content-wrapper contentWrapperTopPad">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+
+               <div class="row topBoxRow">
+                  <div class="col-md-3 col-12 firstTopMain">
+                     <div class="card">
+                        <div class="card-header">
+                           <h4 class="card-title">Number of Responses</h4>
+                           <span>Number of Responses, Last 3 Months</span>
+                           <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        </div>
+                        <div class="card-content">
+                           <div class="earning-chart position-relative">
+                              <div class="chart-title position-absolute mt-2 ml-2">
+                                 <h1 class="display-4">27,585</h1>
+                              </div>
+                              <div id="chartContainerResponse" style="height: 300px; width: 100%;"></div>
+                              <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3">
+                                 <span class="text-muted"> <a class="danger darken-2">-3.45%</a> vs previous 3 months</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-3 col-12 responseByRegion">
+                     <div class="card">
+                        <div class="card-header">
+                           <h4 class="card-title">Responses by Region</h4>
+                           <span>Number of Responses, Last 7 Days</span>
+                           <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        </div>
+                        <div class="card-content collapse show">
+                           <div class="card-body pt-0">
+                              <p>New Delhi </p>
+                              <div class="progress progress-sm mt-1 mb-0 box-shadow-1">
+                                 <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 92%" aria-valuenow="80"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                              <p class="pt-1">Mumbai </p>
+                              <div class="progress progress-sm mt-1 mb-0 box-shadow-1">
+                                 <div class="progress-bar bg-gradient-x-success-blue" role="progressbar" style="width: 82%" aria-valuenow="48"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                              <p class="pt-1">Pune </p>
+                              <div class="progress progress-sm mt-1 mb-0 box-shadow-1">
+                                 <div class="progress-bar bg-gradient-x-success-green" role="progressbar" style="width: 72%" aria-valuenow="48"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                              <p class="pt-1">Chennai </p>
+                              <div class="progress progress-sm mt-1 mb-0 box-shadow-1">
+                                 <div class="progress-bar bg-gradient-x-success-pink" role="progressbar" style="width: 62%" aria-valuenow="48"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                              <p class="pt-1">Nagpur </p>
+                              <div class="progress progress-sm mt-1 mb-0 box-shadow-1">
+                                 <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 52%" aria-valuenow="48"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-6 col-12">
+                     <div class="card">
+                        <div class="card-header">
+                           <h4 class="card-title">Net Promoter Score by Source </h4>
+                           <span>Net Promoter Score, 3 Jan - 15 Jan</span>
+                           <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        </div>
+                        <div class="card-content collapse show">
+                           <div class="card-body pt-0">
+                              <div class="row mb-1">
+                                 <div class="col-6 col-md-4">
+                                    <h5>Online Surveys</h5>
+                                    <h2 class="danger"><span></span></h2>
+                                 </div>
+                                 <div class="col-6 col-md-4">
+                                    <h5>Email Campaign</h5>
+                                    <h2 class="text-muted"><span></span></h2>
+                                 </div>
+                              </div>
+                              <div class="chartjs">
+                                 <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="row topBoxRow">
+                  <div class="col-12 col-md-3 storeComBoxMain">
+                     <div class="card">
+                        <div class="card-header">
+                           <h4 class="card-title">Store Comments  </h4>
+                           <ul class="commentUL">
+                              <li class="commentGreenLi">10</li>
+                              <li>Yesterday</li>
+                              <li class="commentNPSSur">NPS Survey</li>
+                           </ul>
+                           <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        </div>
+                        <div class="card-content">
+                           <div class="card-body storeComment">
+                              <p>I love the concept of this product, and it is extremely useful and reassuring as a homeowner. The design of the product is sleek and attractive</p>
+                              <ul>
+                                 <li><img src="assets/img/smileComment.png"><span>Product:</span> Usability</li>
+                                 <li><span>Other:</span> General</li>
+                                 <li><img src="assets/img/sadComment.png"><span>Quality:</span> Endurance & Price</li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="cardFooter">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <p>See Original (FR)</p>
+                              </div>
+                              <div class="col-md-3">
+                                 <p class="commentCount"><span>1</span> of 95</p>
+                              </div>
+                              <div class="col-md-3">
+                                 <ul>
+                                 <li><a href="#"><img src="assets/img/prevIcon.png"></a></li>
+                                 <li><a href="#"><img src="assets/img/nextIcon.png"></a></li>
+                                 <ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-12 col-md-9">
+                     <div class="row">
+                        <div class="col-12">
+                           <div class="card">
+                              <div class="card-header">
+                                 <h4 class="card-title">NPS by Product Category Compared With Previous Period</h4>
+                                 <span>Net Promoter Score Feb 2020 - Dec 2020</span>
+                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                              </div>
+                              <div class="card-content collapse show">
+                                 <div class="card-body">
+                                    <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!--/ Total earning & Recent Sales  -->
+               <div class="row">
+                  <div class="col-md-6 netProFooterBox">
+                     <div class="card">
+                        <div class="card-header">
+                           <h4 class="card-title">Net Promoter Data</h4>
+                           <span>Net Promoter Score 24 Oct - 28 Dec</span>
+                           <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        </div>
+                        <div class="card-content collapse show">
+                           <div class="card-body">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="card">
+                        <div class="card-header">
+                           <h4 class="card-title">All Responses With Breakdown by Region </h4>
+                           <span>Net Promoter Score, Last 30 Days</span>
+                           <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        </div>
+                        <div class="card-content collapse show">
+                           <div class="card-body">
+                              <div class="row">
+                                 <div class="col-md-4">
+                                    <ul class="bottomCategory">
+                                       <li><img src="assets/img/cat-but.png"></li>
+                                       <li>Category</li>
+                                    </ul>
+                                 </div>
+                                 <div class="col-md-8">
+                                    <ul class="allProBottomBoxCategory">
+                                       <li><a href="#">All Promoter</a></li>
+                                       <li><a href="#">Promoter Score</a></li>
+                                       <li><a href="#">Promoter Graph</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- END: Content-->
+      <div class="sidenav-overlay"></div>
+      <div class="drag-target"></div>
+      <!-- BEGIN: Footer-->
+      <footer class="footer footer-static footer-light navbar-border navbar-shadow">
+         <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2020 <a class="text-bold-800 grey darken-2" href="#" target="_blank">Dashboard Design</a></span></p>
+      </footer>
+      <!-- END: Footer-->
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+      <!-- BEGIN Vendor JS-->
+	  <script src="assets/js/vendors.min.js"></script>
+      
+      <!-- BEGIN: Page Chart JS-->
+      <script src="assets/js/chart.min.js"></script>
+      <script src="assets/js/raphael-min.js"></script>
+      <script src="assets/js/morris.min.js"></script>
+      <script src="assets/js/jquery-jvectormap-2.0.3.min.js"></script>
+      <script src="assets/js/jquery-jvectormap-world-mill.js"></script>
+      <script src="assets/js/visitor-data.js"></script>
+      <!-- END: Page Chart JS-->
+      <!-- BEGIN: Theme JS-->
+      <script src="assets/js/app-menu.min.js"></script>
+      <script src="assets/js/app.min.js"></script>
+      <script src="assets/js/customizer.min.js"></script>
+      <script src="assets/js/footer.min.js"></script>
+      <!-- END: Theme JS-->
+      <!-- BEGIN: Page JS-->
+      <script src="assets/js/dashboard-sales.min.js"></script>
+      <!-- END: Page JS-->
+   </body>
+   <!-- END: Body-->
+</html>
